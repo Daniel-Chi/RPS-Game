@@ -1,0 +1,12 @@
+#jumboheader {
+    text-align: center;
+    background-color: teal;
+    color: white;
+}
+h2 {
+    font-style: italic;
+}
+#cardhead1, #cardhead2 {
+    background-color: lightseagreen;
+    color: white;
+}
