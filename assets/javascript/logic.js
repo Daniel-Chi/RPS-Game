@@ -36,18 +36,20 @@ function next(start, frequency) {
     let currenttime = moment().format("HH:mm");
     let diff = parseInt(moment(currenttime, "HH:mm").diff(start, "minutes"));
     let lastnightdiff = diff+1440;
-    //for normal diff
+    //for time difference if not wrapping around to previous night
     if (diff>0){
         let remainder = diff % frequency;
         return momenthigh.subtract(remainder, "minutes");
     }
-    //for if running from last night
+    //for if running from previous night
     else {
         let remainder = lastnightdiff % frequency;
         return momenthigh.subtract(remainder, "minutes")
     };
 };
 
+//database event listener pulls from database and displays initial trains on page load
+//and dynamically adds new trains to the page on form submission
 database.ref("/trains").on("child_added", function (snapshot) {
     let strt = moment(snapshot.val().ftime, "HH:mm");
     let frequ = snapshot.val().freq;
